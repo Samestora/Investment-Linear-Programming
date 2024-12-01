@@ -11,10 +11,10 @@ Maksimum investasi di saham,
 > x + 0y + 0z <= Pool * 50%
 
 Minimum investasi di obligasi,
-> 0x + 1y + 0z >= Pool * 25%
+> 0x + 1y + 0z >= Pool * 15%
 
 Minimum investasi di properti,  
-> 0x + 0y + z >= Pool * 35% 
+> 0x + 0y + z >= Pool * 25% 
 
 ### Developing
 ``` pip install -r requirements.txt ```

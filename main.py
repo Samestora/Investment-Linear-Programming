@@ -23,8 +23,8 @@ def index():
         b_values = [
             float(request.form['pool']),
             float(0.5 * float(request.form['pool'])),
-            float(0.25 * -1 *float(request.form['pool'])),
-            float(0.35 * -1 *float(request.form['pool']))
+            float(0.15 * -1 *float(request.form['pool'])),
+            float(0.25 * -1 *float(request.form['pool']))
             ]
         
         # Hitung hasil linear programming dengan data input baru
