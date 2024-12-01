@@ -1,0 +1,66 @@
+Index html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimasi Investasi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Optimasi Investasi</h1>
+        <form action="/calculate" method="post">
+            <div class="mb-3">
+                <label for="total_investment" class="form-label">Total Investasi (dalam USD):</label>
+                <input type="number" step="0.01" name="total_investment" id="total_investment" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="min_shares" class="form-label">Minimal Investasi Saham (dalam USD):</label>
+                <input type="number" step="0.01" name="min_shares" id="min_shares" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="max_property" class="form-label">Maksimal Investasi Properti (dalam USD):</label>
+                <input type="number" step="0.01" name="max_property" id="max_property" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="min_annual_return" class="form-label">Minimal Keuntungan Tahunan (dalam USD):</label>
+                <input type="number" step="0.01" name="min_annual_return" id="min_annual_return" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Hitung</button>
+        </form>
+    </div>
+</body>
+</html>
+
+App.py
+@app.route('/calculate', methods=['POST'])
+def calculate():
+    # Ambil data dari form
+    total_investment = float(request.form['total_investment'])
+    min_shares = float(request.form['min_shares'])
+    max_property = float(request.form['max_property'])
+    min_annual_return = float(request.form['min_annual_return'])
+    
+    # Update batasan sesuai input pengguna
+    A = [[1, 1, 1], [-1, 0, 0], [0, 0, 1]]
+    b = [total_investment, -min_shares, max_property]
+    A_eq = [[0.1, 0.05, 0.07]]
+    b_eq = [min_annual_return]
+
+    # Lakukan optimasi
+    result = linprog(c, A_ub=A, b_ub=b, A_eq=A_eq, b_eq=b_eq, bounds=bounds, method="highs")
+
+    if result.success:
+        investments = {
+            "shares": f"${result.x[0]:,.2f}",
+            "bonds": f"${result.x[1]:,.2f}",
+            "property": f"${result.x[2]:,.2f}"
+        }
+        return render_template('result.html', investments=investments)
+    else:
+        return "Solusi tidak ditemukan. Coba ubah parameter input."
+
+
+
+
