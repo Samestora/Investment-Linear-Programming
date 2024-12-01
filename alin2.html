@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimasi Investasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: #333;
+            text-align: center;
+        }
+
+        header {
+            background-color: #005f73;
+            color: white;
+            padding: 1rem;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        main {
+            margin: 2rem auto;
+            padding: 1rem;
+            max-width: 800px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #005f73;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .results {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: #f4f4f4;
+            border-radius: 8px;
+            padding: 1rem;
+            width: 30%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            color: #0077b6;
+            margin-bottom: 0.5rem;
+        }
+
+        button {
+            background-color: #0077b6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005f73;
+        }
+
+        footer {
+            background-color: #005f73;
+            color: white;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Optimasi Investasi</h1>
+    </header>
+    <main>
+        <h2>Masukkan Jumlah Investasi</h2>
+        <form id="investment-form">
+            <div class="form-group">
+                <label for="investment-shares">Investasi Saham ($):</label>
+                <input type="number" id="investment-shares" placeholder="Masukkan jumlah investasi saham" value="60000" required>
+            </div>
+            <div class="form-group">
+                <label for="investment-bonds">Investasi Obligasi ($):</label>
+                <input type="number" id="investment-bonds" placeholder="Masukkan jumlah investasi obligasi" value="45000" required>
+            </div>
+            <div class="form-group">
+                <label for="investment-property">Investasi Properti ($):</label>
+                <input type="number" id="investment-property" placeholder="Masukkan jumlah investasi properti" value="45000" required>
+            </div>
+            <button type="button" id="calculate-button">Hitung Total</button>
+        </form>
+        <div class="results">
+            <div class="card">
+                <h3>Total Investasi</h3>
+                <p id="total-investment">$150,000.00</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Optimasi Investasi
+    </footer>
+    <script>
+        document.getElementById("calculate-button").addEventListener("click", function () {
+            // Ambil nilai input
+            const shares = parseFloat(document.getElementById("investment-shares").value) || 0;
+            const bonds = parseFloat(document.getElementById("investment-bonds").value) || 0;
+            const property = parseFloat(document.getElementById("investment-property").value) || 0;
+
+            // Hitung total investasi
+            const totalInvestment = shares + bonds + property;
+
+            // Tampilkan hasil
+            document.getElementById("total-investment").textContent = `$${totalInvestment.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>
